@@ -2,20 +2,13 @@
 <!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans>
-    <bean id="triangle" class="ua.burdyga.spring.Triangle" name="triangle-name">
-        <property name="pointA" ref="zeroPoint">
-        </property>
-        <property name="pointB">
-            <bean class="ua.burdyga.spring.Point">
-                <property name="x" value="-20"/>
-                <property name="y" value="0"/>
-            </bean>
-        </property>
-        <property name="pointC">
-            <bean class="ua.burdyga.spring.Point">
-                <property name="x" value="20"/>
-                <property name="y" value="0"/>
-            </bean>
+    <bean id="triangle" class="ua.burdyga.spring.Triangle">
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint"/>
+                <ref bean="point2"/>
+                <ref bean="point3"/>
+            </list>
         </property>
     </bean>
 
@@ -24,5 +17,13 @@
         <property name="y" value="0"/>
     </bean>
 
-    <alias name="triangle" alias="triangle-alias"/>
+    <bean id="point2" class="ua.burdyga.spring.Point">
+        <property name="x" value="-20"/>
+        <property name="y" value="0"/>
+    </bean>
+
+    <bean id="point3" class="ua.burdyga.spring.Point">
+        <property name="x" value="20"/>
+        <property name="y" value="0"/>
+    </bean>
 </beans>
