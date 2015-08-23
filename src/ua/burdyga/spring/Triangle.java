@@ -5,7 +5,10 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.util.List;
+
 public class Triangle implements ApplicationContextAware, BeanNameAware {
+    private List<Point> points;
     private Point pointA;
     private Point pointB;
     private Point pointC;
