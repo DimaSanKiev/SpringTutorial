@@ -1,14 +1,10 @@
 package ua.burdyga.spring;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
-import java.util.List;
-
-public class Triangle implements ApplicationContextAware, BeanNameAware {
-    private List<Point> points;
+public class Triangle implements InitializingBean, DisposableBean {
     private Point pointA;
     private Point pointB;
     private Point pointC;
@@ -45,12 +41,20 @@ public class Triangle implements ApplicationContextAware, BeanNameAware {
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext context) throws BeansException {
-        this.context = context;
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("InitializingBeans init method called for Triangle");
     }
 
     @Override
-    public void setBeanName(String beanName) {
-        System.out.println("Bean name is: " + beanName);
+    public void destroy() throws Exception {
+        System.out.println("DisposableBeans destroy method called for the Triangle");
+    }
+
+    public void myInit() {
+        System.out.println("My init method called for Triangle");
+    }
+
+    public void cleanUp() {
+        System.out.println("My cleanup method called for the Triangle");
     }
 }

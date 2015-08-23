@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
-<beans>
+<beans default-init-method="myInit" default-destroy-method="cleanUp">
+    <bean id="triangle" class="ua.burdyga.spring.Triangle" autowire="byName">
 
-    <bean id="parenttriangle" class="ua.burdyga.spring.Triangle" abstract="true">
-        <property name="points">
-            <list>
-                <ref bean="pointA"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="triangle1" class="ua.burdyga.spring.Triangle" parent="parenttriangle">
-        <property name="points">
-            <list merge="true">
-                <ref bean="pointB"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="triangle2" class="ua.burdyga.spring.Triangle" parent="parenttriangle">
-        <property name="pointB" ref="pointB"/>
     </bean>
 
     <bean id="pointA" class="ua.burdyga.spring.Point">
