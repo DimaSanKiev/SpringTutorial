@@ -2,6 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
 <beans default-init-method="myInit" default-destroy-method="cleanUp">
+
     <bean id="triangle" class="ua.burdyga.spring.Triangle">
         <property name="pointA" ref="pointA"/>
         <property name="pointB" ref="pointB"/>
@@ -24,8 +25,10 @@
     </bean>
 
     <bean id="circle" class="ua.burdyga.spring.Circle">
-        <property name="center" ref="pointA"/>
+        <!--<property name="center" ref="pointA"/>-->
     </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
     <!--<bean class="ua.burdyga.spring.DisplayNameBeanPostProcessor"/>-->
 
