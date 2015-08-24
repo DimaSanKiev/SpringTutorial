@@ -9,8 +9,8 @@
     </bean>
 
     <bean id="pointA" class="ua.burdyga.spring.Point">
-        <property name="x" value="0"/>
-        <property name="y" value="0"/>
+        <property name="x" value="${pointA.pointX}"/>
+        <property name="y" value="${pointA.pointY}"/>
     </bean>
 
     <bean id="pointB" class="ua.burdyga.spring.Point">
@@ -23,6 +23,23 @@
         <property name="y" value="0"/>
     </bean>
 
-    <bean class="ua.burdyga.spring.DisplayNameBeanPostProcessor"/>
+    <!--<bean class="ua.burdyga.spring.DisplayNameBeanPostProcessor"/>-->
 
+    <!--<bean class="ua.burdyga.spring.MyBeanFactoryPP"/>-->
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="pointsconfig.properties"/>
+    </bean>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
