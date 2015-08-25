@@ -1,6 +1,7 @@
 package ua.burdyga.spring_aop.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 
 @Aspect
@@ -12,7 +13,7 @@ public class LoggingAspect {
 //        System.out.println(circle);
     }
 
-    @AfterReturning(pointcut = "args(name)", returning = "returnString")
+    @AfterReturning(pointcut = "args(name)", returning = "returnString", argNames = "name, returnString")
     public void stringArgumentMethods(String name, Object returnString) {
         System.out.println("A method that takes String arguments has been called. Value is: " + name + ". The output value is: " + returnString);
     }
@@ -20,6 +21,22 @@ public class LoggingAspect {
     @AfterThrowing(pointcut = "args(name)", throwing = "ex")
     public void exceptionAdvice(String name, Exception ex) {
         System.out.println("An exception has been thrown " + ex);
+    }
+
+    @Around(value = "allGetters()")
+    public Object myAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+        Object returnValue = null;
+
+        try {
+            System.out.println("Before advice");
+            returnValue = proceedingJoinPoint.proceed();
+            System.out.println("After returning");
+        } catch (Throwable throwable) {
+            System.out.println("After throwing");
+        }
+
+        System.out.println("After finally");
+        return returnValue;
     }
 
     /*@Before("allGetters()")
