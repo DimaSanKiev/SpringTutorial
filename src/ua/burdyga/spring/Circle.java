@@ -2,6 +2,7 @@ package ua.burdyga.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +11,10 @@ import javax.annotation.Resource;
 
 @Component
 public class Circle implements Shape {
+
     private Point center;
+    @Autowired
+    private MessageSource messageSource;
 
     public Point getCenter() {
         return center;
@@ -23,10 +27,15 @@ public class Circle implements Shape {
         this.center = center;
     }
 
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
     @Override
     public void draw() {
-        System.out.println("Drawing Circle");
-        System.out.println("Circle, Point is: (" + center.getX() + ", " + center.getY() + ")");
+        System.out.println(this.messageSource.getMessage("drawing.circle", null, "Default Drawing Message", null));
+        System.out.println(this.messageSource.getMessage("drawing.point", new Object[] {center.getX(), center.getY()}, "Default Point Message", null));
+        System.out.println(this.messageSource.getMessage("greeting", null, "Default Greeting", null));
     }
 
     @PostConstruct
