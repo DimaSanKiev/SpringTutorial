@@ -15,7 +15,7 @@
     </bean>
 
     <bean name="circle" class="ua.burdyga.spring_aop.model.Circle">
-        <property name="name" value="Circle name"/>
+        <!--<property name="name" value="Circle name"/>-->
     </bean>
 
     <bean name="shapeService" class="ua.burdyga.spring_aop.service.ShapeService" autowire="byName"/>
