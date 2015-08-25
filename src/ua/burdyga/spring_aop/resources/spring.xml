@@ -22,4 +22,13 @@
 
     <bean name="loggingAspect" class="ua.burdyga.spring_aop.aspect.LoggingAspect"/>
 
+    <bean name="loggingAspectXml" class="ua.burdyga.spring_aop.aspect.LoggingAspectXml"/>
+
+    <aop:config>
+        <aop:aspect id="loggingAspect" ref="loggingAspectXml">
+            <aop:pointcut id="allGetters" expression="execution(* get*())"/>
+            <aop:around method="myAroundAdvice" pointcut-ref="allGetters"/>
+        </aop:aspect>
+    </aop:config>
+
 </beans>
