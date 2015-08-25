@@ -1,27 +1,35 @@
 package ua.burdyga.spring_aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import ua.burdyga.spring_aop.model.Circle;
 
 @Aspect
 public class LoggingAspect {
 
-    @Before("allGetters() && allCircleMethods()")
-    public void loggingAdvice() {
-        System.out.println("Advice run. Get method called");
+    @Before(value = "allCircleMethods()")
+    public void loggingAdvice(JoinPoint joinPoint) {
+        Circle circle = (Circle) joinPoint.getTarget();
+        System.out.println(circle);
     }
 
-    @Before("allGetters()")
+    @Before("args(name)")
+    public void stringArgumentMethods(String name) {
+        System.out.println("A method that takes String arguments has been called. Name is: " + name);
+    }
+
+    /*@Before("allGetters()")
     public void secondAdvice() {
         System.out.println("Second advice executed");
-    }
+    }*/
 
-    @Pointcut("execution(* get*())")
+    @Pointcut(value = "execution(* get*())")
     public void allGetters() {
     }
 
-    @Pointcut("within(ua.burdyga.spring_aop.model.Circle)")
+    @Pointcut(value = "within(ua.burdyga.spring_aop.model.Circle)")
     public void allCircleMethods() {
     }
 
