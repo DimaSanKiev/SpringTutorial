@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DrawingApp {
     public static void main(String[] args) {
 
-        AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("ua/burdyga/spring/resources/spring.xml");
 //        context.registerShutdownHook();
         Shape shape = (Shape) context.getBean("circle");
         shape.draw();
