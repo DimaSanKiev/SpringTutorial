@@ -50,5 +50,5 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="ua.burdyga"/>
+    <context:component-scan base-package="ua.burdyga.spring"/>
 </beans>
