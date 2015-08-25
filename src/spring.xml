@@ -29,10 +29,6 @@
         <property name="y" value="0"/>
     </bean>
 
-    <bean id="circle" class="ua.burdyga.spring.Circle">
-        <!--<property name="center" ref="pointA"/>-->
-    </bean>
-
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
@@ -45,4 +41,6 @@
     </bean>
 
     <context:annotation-config/>
+
+    <context:component-scan base-package="ua.burdyga"/>
 </beans>
