@@ -10,6 +10,7 @@ public class ShapeService {
 
     @Loggable
     public Circle getCircle() {
+        System.out.println("Circle getter called");
         return circle;
     }
 
