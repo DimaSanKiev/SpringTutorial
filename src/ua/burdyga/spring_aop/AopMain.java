@@ -9,7 +9,7 @@ public class AopMain {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("ua/burdyga/spring_aop/resources/spring.xml");
         ShapeService shapeService = ctx.getBean("shapeService", ShapeService.class);
-        System.out.println(shapeService.getTriangle().getName());
+        System.out.println(shapeService.getCircle().getName());
     }
 
 }
