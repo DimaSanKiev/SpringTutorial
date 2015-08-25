@@ -23,7 +23,7 @@ public class LoggingAspect {
         System.out.println("An exception has been thrown " + ex);
     }
 
-    @Around(value = "allGetters()")
+    @Around("@annotation(ua.burdyga.spring_aop.aspect.Loggable)")
     public Object myAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
         Object returnValue = null;
 
@@ -46,6 +46,10 @@ public class LoggingAspect {
 
     @Pointcut(value = "execution(* get*())")
     public void allGetters() {
+    }
+
+    @Pointcut(value = "execution(* ua.burdyga.spring_aop.service.*Service.*(..))")
+    public void allServiceClasses() {
     }
 
     @Pointcut(value = "within(ua.burdyga.spring_aop.model.Circle)")
