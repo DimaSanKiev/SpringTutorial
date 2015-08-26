@@ -3,3 +3,4 @@ SpringTutorial.iml
 lib
 out
 SpringDB
+derby.log
