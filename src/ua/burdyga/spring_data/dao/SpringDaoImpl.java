@@ -1,17 +1,21 @@
 package ua.burdyga.spring_data.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.burdyga.spring_data.model.Circle;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class SpringDaoImpl {
 
-    @Autowired
     private DataSource dataSource;
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
     public Circle getCircle(int circleId) {
         Connection conn = null;
@@ -43,12 +47,25 @@ public class SpringDaoImpl {
         }
     }
 
+    public int getCircleCount() {
+        String sql = "SELECT COUNT(*) FROM circle";
+        return jdbcTemplate.queryForInt(sql);
+    }
+
     public DataSource getDataSource() {
         return dataSource;
     }
 
+    @Autowired
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 }
