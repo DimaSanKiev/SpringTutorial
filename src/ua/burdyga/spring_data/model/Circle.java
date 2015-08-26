@@ -9,6 +9,9 @@ public class Circle {
         setName(name);
     }
 
+    public Circle() {
+    }
+
     public int getId() {
         return id;
     }

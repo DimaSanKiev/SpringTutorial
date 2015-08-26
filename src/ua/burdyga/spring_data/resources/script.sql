@@ -6,3 +6,4 @@ CREATE TABLE circle (
 );
 
 INSERT INTO circle VALUES (1, 'First Circle');
+INSERT INTO circle VALUES (2, 'Second Circle');

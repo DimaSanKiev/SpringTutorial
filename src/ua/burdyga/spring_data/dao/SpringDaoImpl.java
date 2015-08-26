@@ -2,6 +2,7 @@ package ua.burdyga.spring_data.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import ua.burdyga.spring_data.model.Circle;
 
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Component
 public class SpringDaoImpl {
@@ -52,6 +54,21 @@ public class SpringDaoImpl {
         return jdbcTemplate.queryForInt(sql);
     }
 
+    public String getCircleName(int circleId) {
+        String sql = "SELECT name FROM circle WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{circleId}, String.class);
+    }
+
+    public Circle getCircleForId(int circleId) {
+        String sql = "SELECT * FROM circle WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{circleId}, new CircleMapper());
+    }
+
+    public List<Circle> getAllCircles() {
+        String sql = "SELECT * FROM circle";
+        return jdbcTemplate.query(sql, new CircleMapper());
+    }
+
     public DataSource getDataSource() {
         return dataSource;
     }
@@ -67,5 +84,17 @@ public class SpringDaoImpl {
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+
+    private static final class CircleMapper implements RowMapper<Circle> {
+
+        @Override
+        public Circle mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            Circle circle = new Circle();
+            circle.setId(resultSet.getInt("id"));
+            circle.setName(resultSet.getString("name"));
+            return circle;
+        }
     }
 }
