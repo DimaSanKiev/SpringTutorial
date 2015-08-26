@@ -1,4 +1,4 @@
-package ua.burdyga.spring;
+package ua.burdyga.spring_core;
 
 public class Point {
     private int x;

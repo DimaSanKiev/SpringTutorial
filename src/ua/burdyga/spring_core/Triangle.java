@@ -1,4 +1,4 @@
-package ua.burdyga.spring;
+package ua.burdyga.spring_core;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

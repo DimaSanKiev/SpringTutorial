@@ -1,4 +1,4 @@
-package ua.burdyga.spring;
+package ua.burdyga.spring_core;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

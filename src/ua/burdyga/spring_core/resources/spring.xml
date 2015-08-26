@@ -7,24 +7,24 @@
        xmlns:context="http://www.springframework.org/schema/context"
        default-init-method="myInit" default-destroy-method="cleanUp">
 
-    <bean id="triangle" class="ua.burdyga.spring.Triangle">
+    <bean id="triangle" class="ua.burdyga.spring_core.Triangle">
         <property name="pointA" ref="pointA"/>
         <property name="pointB" ref="pointB"/>
         <property name="pointC" ref="pointC"/>
     </bean>
 
-    <bean id="pointA" class="ua.burdyga.spring.Point">
+    <bean id="pointA" class="ua.burdyga.spring_core.Point">
         <qualifier value="circleRelated"/>
         <property name="x" value="${pointA.pointX}"/>
         <property name="y" value="${pointA.pointY}"/>
     </bean>
 
-    <bean id="pointB" class="ua.burdyga.spring.Point">
+    <bean id="pointB" class="ua.burdyga.spring_core.Point">
         <property name="x" value="-20"/>
         <property name="y" value="0"/>
     </bean>
 
-    <bean id="pointC" class="ua.burdyga.spring.Point">
+    <bean id="pointC" class="ua.burdyga.spring_core.Point">
         <property name="x" value="20"/>
         <property name="y" value="0"/>
     </bean>
@@ -37,7 +37,7 @@
     <!--<bean class="ua.burdyga.spring.MyBeanFactoryPP"/>-->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="ua/burdyga/spring/resources/pointsconfig.properties"/>
+        <property name="locations" value="ua/burdyga/spring_core/resources/pointsconfig.properties"/>
     </bean>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -50,5 +50,5 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="ua.burdyga.spring"/>
+    <context:component-scan base-package="ua.burdyga.spring_core"/>
 </beans>
