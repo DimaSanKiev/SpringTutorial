@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import ua.burdyga.spring_data.model.Circle;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,37 +15,7 @@ import java.util.List;
 public class SpringDaoImpl {
 
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
-
-    public Circle getCircle(int circleId) {
-        Connection conn = null;
-
-        try {
-            conn = dataSource.getConnection();
-
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM CIRCLE WHERE ID= ?");
-            ps.setInt(1, circleId);
-
-            Circle circle = null;
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                circle = new Circle(circleId, rs.getString("name"));
-            }
-            rs.close();
-            ps.close();
-            return circle;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                assert conn != null;
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    private JdbcTemplate jdbcTemplate;
 
     public int getCircleCount() {
         String sql = "SELECT COUNT(*) FROM circle";
@@ -68,6 +36,17 @@ public class SpringDaoImpl {
         String sql = "SELECT * FROM circle";
         return jdbcTemplate.query(sql, new CircleMapper());
     }
+
+    public void insertCircle(Circle circle) {
+        String sql = "INSERT INTO circle (id, name) VALUES (?, ?)";
+        jdbcTemplate.update(sql, circle.getId(), circle.getName());
+    }
+
+    public void createTriangleTable() {
+        String sql = "CREATE TABLE triangle (id INTEGER, name VARCHAR(50))";
+        jdbcTemplate.execute(sql);
+    }
+
 
     public DataSource getDataSource() {
         return dataSource;
