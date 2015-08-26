@@ -2,7 +2,7 @@ package ua.burdyga.spring_data;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.burdyga.spring_data.dao.SimpleJdbcDaoImpl;
+import ua.burdyga.spring_data.dao.HibernateDaoImpl;
 
 public class JdbcDemo {
 
@@ -21,7 +21,10 @@ public class JdbcDemo {
 
 //        dao.createTriangleTable();
 
-        SimpleJdbcDaoImpl dao= ctx.getBean("simpleJdbcDaoImpl", SimpleJdbcDaoImpl.class);
+//        SimpleJdbcDaoImpl dao= ctx.getBean("simpleJdbcDaoImpl", SimpleJdbcDaoImpl.class);
+//        System.out.println(dao.getCircleCount());
+
+        HibernateDaoImpl dao= ctx.getBean("hibernateDaoImpl", HibernateDaoImpl.class);
         System.out.println(dao.getCircleCount());
 
     }
