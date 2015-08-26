@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.burdyga.spring_data.model.Circle;
 
@@ -20,6 +21,7 @@ public class SpringDaoImpl {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private SimpleJdbcTemplate simpleJdbcTemplate;
 
     public int getCircleCount() {
         String sql = "SELECT COUNT(*) FROM circle";
