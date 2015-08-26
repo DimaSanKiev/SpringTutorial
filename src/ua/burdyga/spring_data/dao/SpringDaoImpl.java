@@ -1,18 +1,23 @@
 package ua.burdyga.spring_data.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ua.burdyga.spring_data.model.Circle;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
-public class JdbcDaoImpl {
+@Component
+public class SpringDaoImpl {
+
+    @Autowired
+    private DataSource dataSource;
 
     public Circle getCircle(int circleId) {
         Connection conn = null;
 
         try {
-            String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection("jdbc:derby:SpringDB");
+            conn = dataSource.getConnection();
 
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM CIRCLE WHERE ID= ?");
             ps.setInt(1, circleId);
@@ -36,6 +41,14 @@ public class JdbcDaoImpl {
                 e.printStackTrace();
             }
         }
+    }
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
 }
